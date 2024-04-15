@@ -1,0 +1,21 @@
+
+vars:
+	usera: S 0
+
+
+
+main:
+	MOV eax, 12
+	MOV [usera], eax
+	MOV eax, [usera]
+	MOV ebx, 0
+	CMP eax, ebx
+	JG userIf0
+	userIf0Rest:
+	
+	EXIT
+
+userIf0:
+	MOV eax, 123
+	PRINTN
+	jmp userIf0Rest

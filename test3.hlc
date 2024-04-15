@@ -1,0 +1,6 @@
+signed a
+
+a = 12
+
+if a > 0
+    print 123

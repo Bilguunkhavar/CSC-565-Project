@@ -1,0 +1,51 @@
+
+vars:
+	usera: US 0
+	userb: US 0
+	userx: S 0
+	usery: S 0
+
+prints:
+	print0: "\n", 2
+	print1: "\n", 2
+
+main:
+	MOV eax, 10
+	MOV [usera], eax
+	MOV eax, 2
+	MOV [userb], eax
+	MOV eax, 5
+	MOV [userx], eax
+	MOV eax, 1
+	MOV [usery], eax
+	userWhile0Start:
+	MOV eax, [userx]
+	MOV ebx, 0
+	CMP eax, ebx
+	JL userWhile0
+	userWhile1Start:
+	MOV eax, [usera]
+	MOV ebx, 0
+	CMP eax, ebx
+	JG userWhile1
+	
+	EXIT
+
+userWhile0:
+	MOV eax, [userx]
+	PRINTV
+	MOV eax, [print0]
+	PRINT
+	MOV eax, [userx]
+	MOV ebx, [usery]
+	ADD eax, ebx
+	MOV [userx], eax
+	jmp userWhile0Start
+	userWhile1:
+	MOV eax, [print1]
+	PRINT
+	MOV eax, [usera]
+	MOV ebx, [userb]
+	SUB eax, ebx
+	MOV [usera], eax
+	jmp userWhile1Start

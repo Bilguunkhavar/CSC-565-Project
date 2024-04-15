@@ -1,0 +1,11 @@
+
+
+
+
+
+main:
+	MOV eax, 11
+	PRINTN
+	EXIT
+
+
