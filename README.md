@@ -1,6 +1,6 @@
 # CSC-565 Term Project
 
-This project's aim is to build a compiler that converts HLC (custom made High Level Code) file into YMC (assembly file) and BYMC (binary file).
+This project's aim is to build a compiler that converts HLC (custom made High Level Code) file into YMC (assembly file) and BYMC (binary file). It also outputs a csv file which would be easier to track which line of HLC turned into which line in the binary file and assembly file.
 
 ## To start
 
