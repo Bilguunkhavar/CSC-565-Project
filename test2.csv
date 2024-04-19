@@ -1,0 +1,2 @@
+HLC instruction,YMC Address,YMC assembly,YMC encoding,Modified registers,Modified flags
+print 11,4,"MOV eax, 11\nPRINTN","AA 00 01 0B\n81 00",eax,

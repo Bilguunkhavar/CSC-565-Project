@@ -1,0 +1,5 @@
+HLC instruction,YMC Address,YMC assembly,YMC encoding,Modified registers,Modified flags
+signed a,0,"usera: S 0","",,
+a = 12,4,"MOV eax, 12\nMOV [usera], eax","AA 00 01 0C\nAC 00 A0 01",eax,
+if a > 0,8,"MOV eax, [usera]\nMOV ebx, 0\nCMP eax, ebx\nJG userIf0\nuserIf0Rest:","AD 00 01 A0\nAA 00 02 00\nF0 01 02 00\nD0 00",eax ebx,
+    print 123,22,"MOV eax, 123\nPRINTN\njmp userIf0Rest","AA 00 01 7B\n81 00",eax,
