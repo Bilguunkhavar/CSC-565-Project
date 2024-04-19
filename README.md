@@ -4,7 +4,15 @@ This project's aim is to build a compiler that converts HLC (custom made High Le
 
 ## To start
 
-- Install NodeJS
-- `node app.js test1.hlc`
+- Install NodeJS - https://nodejs.org/en/download
+- `node app.js filename.hlc`
 
-which would output `test1.ymc` and `test1.bymc`.
+Which will out put the csv, assembly, and the binary files.
+
+## Example
+
+```
+node app.js test1.hlc
+```
+
+The output will be: `test1.ymc`, `test1.csv`, and `test1.bymc`.
