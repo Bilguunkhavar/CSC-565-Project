@@ -175,8 +175,8 @@ function convertLMCtoYMC(tokens) {
         const index = tokens[i][0];
         if (action === "END") {
             if (ifOpen) {
-                currentBlock.push(`jmp userIf${ifIndex}Rest`);
-                col1[index]["YMC assembly"].push(`jmp userIf${ifIndex}Rest`);
+                currentBlock.push(`JMP userIf${ifIndex}Rest`);
+                col1[index]["YMC assembly"].push(`JMP userIf${ifIndex}Rest`);
                 labelBlock.push(currentBlock.join("\n\t"));
                 currentBlock = [];
                 ifIndex++;
@@ -184,8 +184,8 @@ function convertLMCtoYMC(tokens) {
             }
 
             if (whileOpen) {
-                currentBlock.push(`jmp userWhile${whileIndex}Start`);
-                col1[index]["YMC assembly"].push(`jmp userWhile${whileIndex}Start`);
+                currentBlock.push(`JMP userWhile${whileIndex}Start`);
+                col1[index]["YMC assembly"].push(`JMP userWhile${whileIndex}Start`);
                 labelBlock.push(currentBlock.join("\n\t"));
                 currentBlock = [];
                 whileIndex++;
@@ -525,7 +525,7 @@ function convertYMCtoBinary(fileName) {
             if (row.startsWith("main") || row.startsWith("prints") || row.startsWith("vars")) {
                 continue;
             }
-
+            
             jumpToIndex.set(row.substring(0, row.length - 1), binaryCode.length);
         } else if (row.startsWith("MOV ")) {
             const [l, r] = row.substring(4).split(", ");
@@ -568,7 +568,7 @@ function convertYMCtoBinary(fileName) {
 
             col1[startI]["YMC encoding"].push(formatBuffer(Buffer.from([0xd0, 0])));
         } else if (row.startsWith("JGE ")) {
-            const jumpTo = row.substring(3);
+            const jumpTo = row.substring(4);
             const index = binaryCode.length + 1;
             indexToJump.set(index, jumpTo);
             col1[startI]["YMC Address"] =
@@ -586,7 +586,7 @@ function convertYMCtoBinary(fileName) {
 
             col1[startI]["YMC encoding"].push(formatBuffer(Buffer.from([0xd2, 0])));
         } else if (row.startsWith("JLE ")) {
-            const jumpTo = row.substring(3);
+            const jumpTo = row.substring(4);
             const index = binaryCode.length + 1;
             indexToJump.set(index, jumpTo);
             col1[startI]["YMC Address"] =
@@ -595,7 +595,7 @@ function convertYMCtoBinary(fileName) {
 
             col1[startI]["YMC encoding"].push(formatBuffer(Buffer.from([0xd3, 0])));
         } else if (row.startsWith("JNE ")) {
-            const jumpTo = row.substring(3);
+            const jumpTo = row.substring(4);
             const index = binaryCode.length + 1;
             indexToJump.set(index, jumpTo);
             col1[startI]["YMC Address"] =
@@ -614,6 +614,16 @@ function convertYMCtoBinary(fileName) {
             binaryCode = Buffer.concat([binaryCode, Buffer.from([0xd5, 0])]);
 
             col1[startI]["YMC encoding"].push(formatBuffer(Buffer.from([0xd5, 0])));
+        } else if (row.startsWith("JMP ")) {
+            const jumpTo = row.substring(4);
+            const index = binaryCode.length + 1;
+            indexToJump.set(index, jumpTo);
+            col1[startI]["YMC Address"] =
+                col1[startI]["YMC Address"] === 0 ? binaryCode.length : col1[startI]["YMC Address"];
+
+            binaryCode = Buffer.concat([binaryCode, Buffer.from([0x55, 0])]);
+
+            col1[startI]["YMC encoding"].push(formatBuffer(Buffer.from([0x55, 0])));
         } else if (row.startsWith("ADD ")) {
             const r1 = row.substring(4).split(", ")[0];
             const r2 = row.substring(4).split(", ")[1];
@@ -672,6 +682,8 @@ function convertYMCtoBinary(fileName) {
             binaryCode = Buffer.concat([binaryCode, Buffer.from([0x82, 0])]);
 
             col1[startI]["YMC encoding"].push(formatBuffer(Buffer.from([0x82, 0])));
+        } else if (row === "EXIT") {
+            binaryCode = Buffer.concat([binaryCode, Buffer.from([0x99, 0])]);
         }
     }
 

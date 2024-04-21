@@ -18,4 +18,4 @@ main:
 userIf0:
 	MOV eax, 2
 	PRINTN
-	jmp userIf0Rest
+	JMP userIf0Rest
