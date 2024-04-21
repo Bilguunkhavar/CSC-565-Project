@@ -786,5 +786,3 @@ function driverMain(fullFileName) {
 
     driverMain(fullFileName);
 })();
-
-module.exports.driverMain = driverMain;

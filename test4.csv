@@ -1,5 +1,5 @@
 HLC instruction,YMC Address,YMC assembly,YMC encoding,Modified registers,Modified flags
-print 1,4,"MOV eax, 1\nPRINTN","AA 00 01 01\n81 00",eax,
-if 0 == 0,6,"MOV eax, 0\nMOV ebx, 0\nCMP eax, ebx\nJE userIf0\nuserIf0Rest:","AA 00 01 00\nAA 00 02 00\nF0 01 02 00\nD5 00",eax ebx,
+print 1,0,"MOV eax, 1\nPRINTN","AA 00 01 01\n81 00",eax,
+if 1 == 0,6,"MOV eax, 1\nMOV ebx, 0\nCMP eax, ebx\nJE userIf0\nuserIf0Rest:","AA 00 01 01\nAA 00 02 00\nF0 01 02 00\nD5 00",eax ebx,
     print 2,26,"MOV eax, 2\nPRINTN","AA 00 01 02\n81 00",eax,
 print 3,20,"jmp userIf0Rest\nMOV eax, 3\nPRINTN","AA 00 01 03\n81 00",eax,

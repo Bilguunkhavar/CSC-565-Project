@@ -6,7 +6,7 @@
 main:
 	MOV eax, 1
 	PRINTN
-	MOV eax, 0
+	MOV eax, 1
 	MOV ebx, 0
 	CMP eax, ebx
 	JE userIf0
