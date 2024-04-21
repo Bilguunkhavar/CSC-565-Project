@@ -16,3 +16,9 @@ node app.js test1.hlc
 ```
 
 The output will be: `test1.ymc`, `test1.csv`, and `test1.bymc`.
+
+## Testing
+
+```
+node test
+```

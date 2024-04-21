@@ -154,7 +154,7 @@ function convertToTokens(rows) {
             tokens.push([i, "END"]);
         }
     }
-
+    console.log(tokens);
     return tokens;
 }
 
@@ -726,21 +726,7 @@ function findIndex(row, x, y) {
     return [-1, -1];
 }
 
-(async () => {
-    const args = process.argv.slice(2);
-
-    if (args.length === 0) {
-        console.log("Please specify file name of your High Level Code");
-        process.exit(1);
-    }
-
-    const fullFileName = args[0];
-
-    if (!fullFileName.endsWith("hlc")) {
-        console.log("The file format should be hlc");
-        process.exit(1);
-    }
-
+function driverMain(fullFileName) {
     const rows = getRowsFromFile(fullFileName);
 
     col1 = rows.map((x) => ({
@@ -782,4 +768,24 @@ function findIndex(row, x, y) {
     fs.writeFileSync(csvFileName, csv);
 
     console.log("Assembly, Binary, and CSV files have been generated...");
+}
+
+(async () => {
+    const args = process.argv.slice(2);
+
+    if (args.length === 0) {
+        console.log("Please specify file name of your High Level Code");
+        process.exit(1);
+    }
+
+    const fullFileName = args[0];
+
+    if (!fullFileName.endsWith("hlc")) {
+        console.log("The file format should be hlc");
+        process.exit(1);
+    }
+
+    driverMain(fullFileName);
 })();
+
+module.exports.driverMain = driverMain;

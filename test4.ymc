@@ -1,0 +1,21 @@
+
+
+
+
+
+main:
+	MOV eax, 1
+	PRINTN
+	MOV eax, 0
+	MOV ebx, 0
+	CMP eax, ebx
+	JE userIf0
+	userIf0Rest:
+	MOV eax, 3
+	PRINTN
+	EXIT
+
+userIf0:
+	MOV eax, 2
+	PRINTN
+	jmp userIf0Rest
