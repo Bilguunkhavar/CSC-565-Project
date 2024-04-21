@@ -154,7 +154,6 @@ function convertToTokens(rows) {
             tokens.push([i, "END"]);
         }
     }
-    console.log(tokens);
     return tokens;
 }
 
